@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import authRouter from "./routes/authRouter.js";
 import productsRouter from "./routes/productsRouter.js";
 import bookRouter from "./routes/bookRouter.js";
+import cartRouter from "./routes/cartRouter.js";
 
 const app = express();
 app.use(json());
@@ -14,6 +15,7 @@ dotenv.config();
 app.use(authRouter);
 app.use(productsRouter);
 app.use(bookRouter);
+app.use(cartRouter);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
