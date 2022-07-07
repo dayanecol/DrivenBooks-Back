@@ -6,7 +6,7 @@ import {
 
 const productsRouter = Router();
 
-productsRouter.get("/products", getProducts);
+productsRouter.get("/products/:type", getProducts);
 productsRouter.post("/products", postProducts);
 
 export default productsRouter;

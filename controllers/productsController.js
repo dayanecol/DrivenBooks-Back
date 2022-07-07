@@ -1,8 +1,9 @@
 import db from "../db.js";
 
 export async function getProducts(req, res) {
+  const type = req.params.type;
   try {
-    const products = await db.collection("products").find().toArray();
+    const products = await db.collection("products").find({ type }).toArray();
     res.status(200).send(products);
     return;
   } catch (error) {
