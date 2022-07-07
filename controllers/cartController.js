@@ -1,14 +1,22 @@
 import db from "../db.js";
 
-export const openCart = async (req,res) => {
-    const { email } = res.locals.session;
-
-    try {
-        const { cart } = await db.collection("cart").findMany({email:email}).toArray();
-        res.status(200).send(cart);
-    } catch (error) {
-        res.status(500).send(error);
+export const openCart = async (req, res) => {
+  const { email } = req.body;
+  try {
+    const infos = await db.collection("cart").find({ email }).toArray();
+    const ids = infos.map((item) => item.id);
+    const books = [];
+    for (let i = 0; i < ids.length; i++) {
+      let book;
+      book = await db.collection("products").findOne({ id: ids[i] });
+      books.push(book);
     }
+    res.send(books);
+  } catch (error) {
+    console.log("Erro no banco de dados", error);
+    res.sendStatus(500);
+    return;
+  }
 };
 
 export async function postCart(req, res) {
@@ -23,4 +31,3 @@ export async function postCart(req, res) {
     return;
   }
 }
-

@@ -7,7 +7,7 @@ import { openCart } from "../controllers/cartController.js";
 
 const cartRouter = express.Router();
 
-cartRouter.get("/cart", openCart);
+cartRouter.get("/cart", validateToken, openCart);
 
 cartRouter.post("/cart", validateToken, validateCartPost, postCart);
 
