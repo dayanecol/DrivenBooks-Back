@@ -5,31 +5,11 @@ import { v4 as uuid } from "uuid";
 
 export async function signIn(req, res) {
   const { email, password } = req.body;
-
-export async function signIn(req,res){
-    const {email, password} = req.body;
-    
-    try {
-        const user = await db.collection("users").findOne({email:email});
-        if(!user){
-            res.sendStatus(404);
-            return;
-        }
-        if(user && bcrypt.compareSync(password,user.password)){
-            const token = uuid();
-            await db.collection("sessions").insertOne({
-                userId: user._id,
-                token
-            })
-            return res.send({token, name:user.name, email});
-        }
-        res.sendStatus(201);
-        return;
-    } catch (error) {
-        console.log("Erro ao logar usuário!", error);
-        res.sendStatus(500);
-        return;       
-
+  try {
+    const user = await db.collection("users").findOne({ email: email });
+    if (!user) {
+      res.sendStatus(404);
+      return;
     }
     if (user && bcrypt.compareSync(password, user.password)) {
       const token = uuid();
@@ -37,7 +17,7 @@ export async function signIn(req,res){
         userId: user._id,
         token,
       });
-      return res.send({ token, name: user.name, email: user.email });
+      return res.send({ token, name: user.name, email });
     }
     res.sendStatus(201);
     return;
