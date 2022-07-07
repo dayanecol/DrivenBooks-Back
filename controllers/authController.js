@@ -19,7 +19,7 @@ export async function signIn(req,res){
                 userId: user._id,
                 token
             })
-            return res.send({token, name:user.name});
+            return res.send({token, name:user.name, email});
         }
         res.sendStatus(201);
         return;
