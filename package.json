@@ -2,11 +2,10 @@
   "name": "projeto14-drivenbooks-back",
   "type": "module",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev":"nodemon index.js"
+    "dev": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
@@ -23,5 +22,14 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.19"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dayanecol/DrivenBooks-Back.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dayanecol/DrivenBooks-Back/issues"
+  },
+  "homepage": "https://github.com/dayanecol/DrivenBooks-Back#readme",
+  "description": ""
 }
