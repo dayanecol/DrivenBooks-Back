@@ -15,7 +15,7 @@ cartRouter.get("/cart", validateToken, openCart);
 
 cartRouter.post("/cart", validateToken, validateCartPost, postCart);
 
-cartRouter.delete("/cart", validateToken, deleteCart);
+cartRouter.delete("/cart/id/:cartId", validateToken, deleteCart);
 
 cartRouter.delete("/cart/deleteAll", validateToken, deleteAll);
 
