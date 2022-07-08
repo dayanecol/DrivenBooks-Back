@@ -10,6 +10,7 @@ export const openCart = async (req, res) => {
     for (let i = 0; i < ids.length; i++) {
       let book;
       book = await db.collection("products").findOne({ id: ids[i] });
+      book.cartId = infos[0]._id;
       books.push(book);
     }
     res.send(books);
