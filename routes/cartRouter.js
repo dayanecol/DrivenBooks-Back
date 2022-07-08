@@ -1,7 +1,7 @@
 import { Router } from "express";
 import validateToken from "../middlewares/validateTokenMiddleware.js";
 import validateCartPost from "../middlewares/validateCartMiddleware.js";
-import { postCart } from "../controllers/cartController.js";
+import { deleteCart, postCart } from "../controllers/cartController.js";
 import express from "express";
 import { openCart } from "../controllers/cartController.js";
 
@@ -10,5 +10,7 @@ const cartRouter = express.Router();
 cartRouter.get("/cart", validateToken, openCart);
 
 cartRouter.post("/cart", validateToken, validateCartPost, postCart);
+
+cartRouter.delete("/cart", validateToken, deleteCart);
 
 export default cartRouter;
