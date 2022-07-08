@@ -7,9 +7,8 @@ import {
   deleteAll,
   openCart,
 } from "../controllers/cartController.js";
-import express from "express";
 
-const cartRouter = express.Router();
+const cartRouter = Router();
 
 cartRouter.get("/cart", validateToken, openCart);
 
