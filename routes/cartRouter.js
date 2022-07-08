@@ -2,10 +2,9 @@ import { Router } from "express";
 import validateToken from "../middlewares/validateTokenMiddleware.js";
 import validateCartPost from "../middlewares/validateCartMiddleware.js";
 import { deleteCart, postCart } from "../controllers/cartController.js";
-import express from "express";
 import { openCart } from "../controllers/cartController.js";
 
-const cartRouter = express.Router();
+const cartRouter = Router();
 
 cartRouter.get("/cart", validateToken, openCart);
 
