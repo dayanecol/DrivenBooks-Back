@@ -2,9 +2,19 @@ import { ObjectId } from "mongodb";
 import db from "../db.js";
 
 export const openCart = async (req, res) => {
-  const { email } = req.body;
+  const authorization = req.headers.authorization;
+  const token = authorization?.replace("Bearer ", "");
   try {
-    const infos = await db.collection("cart").find({ email }).toArray();
+    const findUser = await db.collection("sessions").findOne({ token });
+    console.log(findUser);
+    const user = await db
+      .collection("users")
+      .findOne({ _id: new ObjectId(findUser.userId) });
+    console.log(user);
+    const infos = await db
+      .collection("cart")
+      .find({ email: user.email })
+      .toArray();
     const ids = infos.map((item) => Number(item.id));
     const books = [];
     for (let i = 0; i < ids.length; i++) {
@@ -37,7 +47,7 @@ export async function postCart(req, res) {
 export async function deleteCart(req, res) {
   const body = req.body;
   try {
-    await db.collection("cart").deleteOne({ _id: new ObjectId(body._id) });
+    await db.collection("cart").deleteOne({ _id: new ObjectId(body.cartId) });
     res.sendStatus(200);
     return;
   } catch (error) {
