@@ -21,10 +21,10 @@ export async function signIn(req, res) {
         userId: user._id,
         token,
       });
-      return res.send({ token, name: user.name, email: user.email });
+      return res
+        .status(201)
+        .send({ token, name: user.name, email: user.email });
     }
-    res.sendStatus(201);
-    return;
   } catch (error) {
     console.log("Erro ao logar usuário!", error);
     res.sendStatus(500);
