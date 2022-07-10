@@ -2,6 +2,7 @@ import joi from "joi";
 import db from "../db.js";
 import bcrypt from "bcrypt";
 import { v4 as uuid } from "uuid";
+import { ObjectId } from "mongodb";
 
 export async function signIn(req, res) {
   const { email, password } = req.body;
@@ -13,6 +14,9 @@ export async function signIn(req, res) {
     }
     if (user && bcrypt.compareSync(password, user.password)) {
       const token = uuid();
+      await db
+        .collection("sessions")
+        .deleteMany({ userId: new ObjectId(user._id) });
       await db.collection("sessions").insertOne({
         userId: user._id,
         token,
