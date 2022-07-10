@@ -24,6 +24,8 @@ export async function signIn(req, res) {
       return res
         .status(201)
         .send({ token, name: user.name, email: user.email });
+    } else {
+      res.status(500).send();
     }
   } catch (error) {
     console.log("Erro ao logar usuário!", error);
